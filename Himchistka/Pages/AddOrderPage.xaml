@@ -1,0 +1,107 @@
+<Page x:Class="Himchistka.Pages.AddOrderPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Himchistka.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="550" d:DesignWidth="900"
+      Title="Управление заказом">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Верхняя карточка параметров заказа -->
+        <Border Grid.Row="0" Background="{StaticResource AccentBackground}"
+                BorderBrush="{StaticResource LightBlue}" BorderThickness="1"
+                CornerRadius="6" Padding="15" Margin="0,0,0,12">
+            <StackPanel>
+                <TextBlock x:Name="tbHeader" FontSize="20" FontWeight="Bold"
+                           Foreground="{StaticResource DarkContrast}" Margin="0,0,0,10"
+                           Text="Заказ"/>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" Margin="0,0,15,0">
+                        <TextBlock Text="Клиент:" FontWeight="SemiBold"
+                                   Foreground="{StaticResource DarkContrast}"/>
+                        <ComboBox x:Name="cbClient" DisplayMemberPath="FIO" SelectedValuePath="id"/>
+
+                        <TextBlock Text="Дата оформления (корзины):" FontWeight="SemiBold" Margin="0,6,0,0"
+                                   Foreground="{StaticResource DarkContrast}"/>
+                        <DatePicker x:Name="dpDateOfCart"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1" Margin="15,0,0,0">
+                        <TextBlock Text="Статус выполнения всех позиций:" FontWeight="SemiBold"
+                                   Foreground="{StaticResource DarkContrast}"/>
+                        <StackPanel Orientation="Horizontal">
+                            <ComboBox x:Name="cbMassStatus" Width="200" DisplayMemberPath="Name" SelectedValuePath="id" Margin="0,2,8,6"/>
+                            <Button Content="Применить ко всем" Click="ApplyMassStatus_Click"
+                                    Background="{StaticResource AccentColor}" Margin="0,2,0,6" Padding="8,4"/>
+                        </StackPanel>
+
+                        <TextBlock Text="Дата выдачи / закрытия:" FontWeight="SemiBold" Margin="0,6,0,0"
+                                   Foreground="{StaticResource DarkContrast}"/>
+                        <DatePicker x:Name="dpDateOfBuy"/>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </Border>
+
+        <!-- Таблица позиций заказа -->
+        <Border Grid.Row="1" Background="White" BorderBrush="{StaticResource LightBlue}"
+                BorderThickness="1" CornerRadius="6" Padding="4">
+            <DataGrid x:Name="dgItems" AutoGenerateColumns="False" IsReadOnly="True"
+                      BorderThickness="0" Background="Transparent" GridLinesVisibility="Horizontal"
+                      HorizontalGridLinesBrush="#E0E0E0" SelectionMode="Single">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="№" Binding="{Binding id}" Width="50"/>
+                    <DataGridTextColumn Header="Услуга / Изделие" Binding="{Binding product.name}" Width="*"/>
+                    <DataGridTextColumn Header="Категория" Binding="{Binding product.CategoryName}" Width="150"/>
+                    <DataGridTextColumn Header="Материал" Binding="{Binding product.MaterialName}" Width="130"/>
+                    <DataGridTextColumn Header="Ед. изм." Binding="{Binding UnitName}" Width="80"/>
+                    <DataGridTextColumn Header="Статус" Binding="{Binding StatusName}" Width="140"/>
+                    <DataGridTextColumn Header="Стоимость" Binding="{Binding Sum, StringFormat={}{0:N0} ₽}" Width="110"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+
+        <!-- Нижняя панель действий -->
+        <Border Grid.Row="2" Background="{StaticResource AccentBackground}"
+                BorderBrush="{StaticResource LightBlue}" BorderThickness="1"
+                CornerRadius="6" Padding="12" Margin="0,12,0,0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock x:Name="tbTotal" Grid.Column="0" FontSize="18" FontWeight="Bold"
+                           Foreground="{StaticResource DarkContrast}" VerticalAlignment="Center"
+                           Text="Итого: 0 ₽"/>
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Content="Добавить услугу" Click="AddItem_Click"
+                            Background="{StaticResource AccentColor}" Margin="4,0" Padding="12,6"/>
+                    <Button Content="Сменить статус выбранной" Click="ChangeItemStatus_Click"
+                            Background="{StaticResource DarkContrast}" Margin="4,0" Padding="12,6"/>
+                    <Button Content="Удалить позицию" Click="RemoveItem_Click"
+                            Background="{StaticResource WarningColor}" Margin="4,0" Padding="12,6"/>
+                    <Button Content="Сохранить заказ" Click="Save_Click"
+                            Background="{StaticResource AccentColor}" FontWeight="Bold" Margin="4,0" Padding="14,6"/>
+                    <Button Content="Назад к заказам" Click="Back_Click"
+                            Background="{StaticResource SecondaryButtonColor}" Margin="4,0" Padding="12,6"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Page>

@@ -1,0 +1,118 @@
+<Page x:Class="Himchistka.Pages.OrderPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Himchistka.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="550" d:DesignWidth="900"
+      Title="Управление заказами — Химчистка">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Заголовок и фильтр -->
+        <Grid Grid.Row="0" Margin="0,0,0,15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Список заказов клиентов" FontSize="24"
+                       FontWeight="Bold" Foreground="{StaticResource DarkContrast}"/>
+
+            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock Text="Поиск заказа / клиента:" VerticalAlignment="Center"
+                           FontWeight="SemiBold" Foreground="{StaticResource DarkContrast}" Margin="0,0,8,0"/>
+                <TextBox x:Name="txtSearchOrder" Width="220" TextChanged="Search_TextChanged"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- Список заказов -->
+        <ListView x:Name="listOrders" Grid.Row="1"
+                  BorderBrush="{StaticResource LightBlue}" BorderThickness="1"
+                  HorizontalContentAlignment="Stretch"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                  MouseDoubleClick="listOrders_MouseDoubleClick">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border Margin="4" Padding="12" BorderBrush="{StaticResource LightBlue}"
+                            BorderThickness="1" Background="{StaticResource AccentBackground}"
+                            CornerRadius="6">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="120"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="230"/>
+                                <ColumnDefinition Width="130"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0">
+                                <TextBlock FontWeight="Bold" FontSize="15"
+                                           Foreground="{StaticResource DarkContrast}">
+                                    <Run Text="Заказ №"/>
+                                    <Run Text="{Binding id}"/>
+                                </TextBlock>
+                                <TextBlock FontSize="12" Foreground="#666" Margin="0,2,0,0">
+                                    <Run Text="Позиций: "/>
+                                    <Run Text="{Binding productOrder.Count, Mode=OneWay}"/>
+                                </TextBlock>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="1" Margin="10,0">
+                                <TextBlock FontSize="14" FontWeight="SemiBold"
+                                           Foreground="{StaticResource DarkContrast}">
+                                    <Run Text="Клиент: "/>
+                                    <Run Text="{Binding ClientFIO, Mode=OneWay}"/>
+                                </TextBlock>
+                                <TextBlock FontSize="12" Foreground="#555" Margin="0,2,0,0">
+                                    <Run Text="Телефон: "/>
+                                    <Run Text="{Binding user.phoneNumber}"/>
+                                </TextBlock>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0">
+                                <TextBlock FontSize="13" TextAlignment="Center" HorizontalAlignment="Center">
+                                    <Run Text="Оформлен: " FontWeight="SemiBold"/>
+                                    <Run Text="{Binding dateOfCart, StringFormat=dd.MM.yyyy HH:mm}"/>
+                                </TextBlock>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Right">
+                                <TextBlock FontWeight="Bold" FontSize="16"
+                                           Foreground="{StaticResource DarkContrast}"
+                                           Text="{Binding TotalSum, StringFormat={}{0:N0} ₽}"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <!-- Кнопки внизу -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal"
+                    HorizontalAlignment="Center" Margin="0,15,0,0">
+            <Button x:Name="btnAddOrder" Content="Добавить заказ" Click="AddOrder_Click"
+                    Background="{StaticResource AccentColor}" Margin="4,0" Padding="14,6"/>
+            <Button x:Name="btnEditOrder" Content="Редактировать заказ" Click="EditOrder_Click"
+                    Background="{StaticResource DarkContrast}" Margin="4,0" Padding="14,6"/>
+            <Button x:Name="btnDeleteOrder" Content="Удалить заказ" Click="DeleteOrder_Click"
+                    Background="{StaticResource WarningColor}" Margin="4,0" Padding="14,6"/>
+            <Button x:Name="btnTables" Content="Таблицы БД" Click="Tables_Click"
+                    Background="{StaticResource AccentColor}" Margin="4,0" Padding="14,6"/>
+            <Button Content="Каталог услуг" Click="Products_Click"
+                    Background="{StaticResource AccentColor}" Margin="4,0" Padding="14,6"/>
+            <Button Content="Выход из системы" Click="Exit_Click"
+                    Background="{StaticResource SecondaryButtonColor}" Margin="4,0" Padding="14,6"/>
+        </StackPanel>
+    </Grid>
+</Page>
