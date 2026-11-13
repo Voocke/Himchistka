@@ -5,9 +5,6 @@ using Himchistka.AppData;
 
 namespace Himchistka.Pages
 {
-    /// <summary>
-    /// Логика взаимодействия для AddEditUserWindow.xaml
-    /// </summary>
     public partial class AddEditUserWindow : Window
     {
         private user _user;

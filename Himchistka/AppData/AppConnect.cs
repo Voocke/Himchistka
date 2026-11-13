@@ -53,49 +53,36 @@ namespace Himchistka.AppData
 
     public partial class product
     {
-        /// <summary>Есть ли скидка.</summary>
         public bool HasDiscount => discount.HasValue && discount.Value > 0;
 
-        /// <summary>Цена со скидкой (расчет через CostCalculationService).</summary>
         public decimal FinalPrice => HasDiscount
             ? CostCalculationService.CalculateDiscountedPrice(price, discount.Value)
             : (decimal)price;
 
-        /// <summary>Флаг высокой стоимости услуги (свыше или равно 1000 руб.).</summary>
         public bool IsHighPrice => CostCalculationService.IsHighPriceService(FinalPrice);
 
-        /// <summary>Цвет отображения цены (темно-красный акцент для услуг свыше 1000 руб.).</summary>
         public Brush PriceBrush => IsHighPrice
             ? new SolidColorBrush((Color)ColorConverter.ConvertFromString("#C62828"))
             : new SolidColorBrush((Color)ColorConverter.ConvertFromString("#0D47A1"));
 
-        /// <summary>Отображение скидки.</summary>
         public string DiscountText => HasDiscount ? $"-{discount}%" : "";
 
-        /// <summary>Цвет подсветки карточки (голубой оттенок при скидке).</summary>
         public Brush RowColor => HasDiscount
             ? new SolidColorBrush((Color)ColorConverter.ConvertFromString("#E3F2FD"))
             : new SolidColorBrush(Colors.White);
 
-        /// <summary>Путь к изображению (или заглушка).</summary>
         public string ImagePath
         {
             get
             {
                 if (string.IsNullOrWhiteSpace(image))
                     return "/Images/picture.png";
-                if (image.StartsWith("/") || image.StartsWith("\\"))
-                    return image.Replace('\\', '/');
-                if (image.StartsWith("Images/", StringComparison.OrdinalIgnoreCase) || image.StartsWith("Images\\", StringComparison.OrdinalIgnoreCase))
-                    return "/" + image.Replace('\\', '/');
                 return $"/Images/{image}";
             }
         }
 
-        /// <summary>Название категории.</summary>
         public string CategoryName => category?.category1 ?? "Без категории";
 
-        /// <summary>Название материала.</summary>
         public string MaterialName => material?.material1 ?? "Любой";
     }
 

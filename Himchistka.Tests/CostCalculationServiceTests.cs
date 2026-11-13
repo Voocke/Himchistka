@@ -4,18 +4,14 @@ using Himchistka.AppData;
 
 namespace Himchistka.Tests
 {
-    /// <summary>
-    /// Модульные тесты (Unit Tests) для проверки расчетной бизнес-логики сервиса CostCalculationService.
-    /// Соответствует руководству Microsoft Learn по созданию и запуску модульных тестов для управляемого кода.
-    /// Паттерн тестирования: AAA (Arrange, Act, Assert).
-    /// </summary>
+    // Модульные тесты (Unit Tests) для проверки расчетной бизнес-логики сервиса CostCalculationService.
+    // Соответствует руководству Microsoft Learn по созданию и запуску модульных тестов для управляемого кода.
+    // Паттерн тестирования: AAA (Arrange, Act, Assert).
     [TestClass]
     public class CostCalculationServiceTests
     {
-        /// <summary>
-        /// Тест 1: Проверка корректности расчета стоимости услуги со стандартной скидкой.
-        /// Базовая цена: 1200.00 руб., скидка: 15% => Ожидается: 1020.00 руб.
-        /// </summary>
+        // Тест 1: Проверка корректности расчета стоимости услуги со стандартной скидкой.
+        // Базовая цена: 1200.00 руб., скидка: 15% => Ожидается: 1020.00 руб.
         [TestMethod]
         public void CalculateDiscountedPrice_StandardDiscount_ReturnsCorrectDiscountedPrice()
         {
@@ -31,10 +27,8 @@ namespace Himchistka.Tests
             Assert.AreEqual(expectedPrice, actualPrice, "Итоговая стоимость со скидкой 15% рассчитана неверно.");
         }
 
-        /// <summary>
-        /// Тест 2: Проверка расчета при нулевой скидке (0%).
-        /// Базовая цена: 850.00 руб., скидка: 0% => Цена не должна измениться (850.00 руб.).
-        /// </summary>
+        // Тест 2: Проверка расчета при нулевой скидке (0%).
+        // Базовая цена: 850.00 руб., скидка: 0% => Цена не должна измениться (850.00 руб.).
         [TestMethod]
         public void CalculateDiscountedPrice_ZeroDiscount_ReturnsInitialPrice()
         {
@@ -50,9 +44,7 @@ namespace Himchistka.Tests
             Assert.AreEqual(expectedPrice, actualPrice, "При нулевой скидке цена услуги должна оставаться неизменной.");
         }
 
-        /// <summary>
-        /// Тест 3: Проверка генерации исключения ArgumentOutOfRangeException при недопустимом значении скидки (>100% или <0%).
-        /// </summary>
+        // Тест 3: Проверка генерации исключения ArgumentOutOfRangeException при недопустимом значении скидки (>100% или <0%).
         [TestMethod]
         public void CalculateDiscountedPrice_InvalidDiscount_ThrowsArgumentOutOfRangeException()
         {
@@ -74,10 +66,8 @@ namespace Himchistka.Tests
             }, "Метод должен выбрасывать ArgumentOutOfRangeException при скидке более 100%.");
         }
 
-        /// <summary>
-        /// Тест 4: Проверка валидации граничных значений допустимого количества единиц услуги (диапазон 1..300 шт.).
-        /// Границы: 0 (ложь), 1 (истина), 300 (истина), 301 (ложь).
-        /// </summary>
+        // Тест 4: Проверка валидации граничных значений допустимого количества единиц услуги (диапазон 1..300 шт.).
+        // Границы: 0 (ложь), 1 (истина), 300 (истина), 301 (ложь).
         [TestMethod]
         public void ValidateQuantity_BoundaryValues_ReturnsExpectedResults()
         {
@@ -89,9 +79,7 @@ namespace Himchistka.Tests
             Assert.IsFalse(CostCalculationService.ValidateQuantity(301), "Значение 301 шт. должно превышать максимальный лимит.");
         }
 
-        /// <summary>
-        /// Тест 5: Проверка порогового условия для визуального цветового акцентирования цен (порог 1000.00 руб.).
-        /// </summary>
+        // Тест 5: Проверка порогового условия для визуального цветового акцентирования цен (порог 1000.00 руб.).
         [TestMethod]
         public void IsHighPriceService_ThresholdChecks_IdentifiesAccentRequirement()
         {

@@ -11,9 +11,6 @@ using Himchistka.AppData;
 
 namespace Himchistka.Pages
 {
-    /// <summary>
-    /// Логика взаимодействия для DatabaseTablesPage.xaml
-    /// </summary>
     public partial class DatabaseTablesPage : Page
     {
         private string _currentTable = "product";

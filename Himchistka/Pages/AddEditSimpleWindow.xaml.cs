@@ -3,9 +3,6 @@ using System.Windows;
 
 namespace Himchistka.Pages
 {
-    /// <summary>
-    /// Логика взаимодействия для AddEditSimpleWindow.xaml
-    /// </summary>
     public partial class AddEditSimpleWindow : Window
     {
         public string ResultValue { get; private set; }

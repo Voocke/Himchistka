@@ -8,9 +8,6 @@ using Himchistka.AppData;
 
 namespace Himchistka.Pages
 {
-    /// <summary>
-    /// Логика взаимодействия для OrderPage.xaml
-    /// </summary>
     public partial class OrderPage : Page
     {
         private List<order> _allOrders = new List<order>();

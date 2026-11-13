@@ -5,9 +5,6 @@ using Himchistka.AppData;
 
 namespace Himchistka.Pages
 {
-    /// <summary>
-    /// Логика взаимодействия для AddEditProductOrderWindow.xaml
-    /// </summary>
     public partial class AddEditProductOrderWindow : Window
     {
         private productOrder _item;

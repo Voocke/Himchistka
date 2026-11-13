@@ -8,9 +8,6 @@ using Himchistka.AppData;
 
 namespace Himchistka.Pages
 {
-    /// <summary>
-    /// Логика взаимодействия для ProductsPage.xaml
-    /// </summary>
     public partial class ProductsPage : Page
     {
         private List<product> _all = new List<product>();

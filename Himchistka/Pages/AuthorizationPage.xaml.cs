@@ -6,9 +6,6 @@ using Himchistka.AppData;
 
 namespace Himchistka.Pages
 {
-    /// <summary>
-    /// Логика взаимодействия для AuthorizationPage.xaml
-    /// </summary>
     public partial class AuthorizationPage : Page
     {
         public AuthorizationPage()
